@@ -167,7 +167,7 @@ jobs:
           fi
 
           if [ "${{ inputs.enhancedNav }}" == "Yes" ]; then
-            ARGS+=("--forceInternalNavigation")
+            ARGS+=("--force-internal-navigation")
             ARGS+=("--enable-drag-drop")
             ARGS+=("--enable-find")
           fi
@@ -219,7 +219,7 @@ jobs:
           }
 
           if ("${{ inputs.enhancedNav }}" -eq "Yes") {
-            $args += "--forceInternalNavigation"
+            $args += "--force-internal-navigation"
             $args += "--enable-drag-drop"
             $args += "--enable-find"
           }
