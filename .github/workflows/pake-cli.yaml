@@ -67,7 +67,14 @@ on:
         description: "Package formats (comma-separated: deb,appimage,rpm,zst)"
         required: false
         default: "deb"
-
+      debug:
+        description: "Debug?"
+        required: true
+        default: "No"
+        type: choice
+        options:
+          - "Yes"
+          - "No"
 jobs:
   build:
     name: ${{ inputs.platform }}
@@ -159,6 +166,13 @@ jobs:
             ARGS+=("--targets" "${{ inputs.targets }}")
           fi
 
+          if [ "${{ inputs.debug }}" == "Yes" ]; then
+            ARGS+=("--use-local-file")
+            ARGS+=("--debug")
+            ARGS+=("--enable-drag-drop")
+            ARGS+=("--enable-find")
+          fi
+
           echo "Running: node dist/cli.js ${ARGS[@]}"
           node dist/cli.js "${ARGS[@]}"
 
@@ -203,6 +217,13 @@ jobs:
 
           if ("${{ inputs.new_window }}" -eq "true") {
             $args += "--new-window"
+          }
+
+          if ("${{ inputs.debug }}" -eq "Yes") {
+            $args += "--use-local-file"
+            $args += "--debug"
+            $args += "--enable-drag-drop"
+            $args += "--enable-find"
           }
 
           Write-Host "Running: node dist/cli.js $($args -join ' ')"
