@@ -168,6 +168,7 @@ jobs:
 
           if [ "${{ inputs.enhancedNav }}" == "Yes" ]; then
             ARGS+=("--force-internal-navigation")
+            ARGS+=("--inject" "./bin/navigation.js")
             ARGS+=("--enable-drag-drop")
             ARGS+=("--enable-find")
           fi
@@ -220,6 +221,7 @@ jobs:
 
           if ("${{ inputs.enhancedNav }}" -eq "Yes") {
             $args += "--force-internal-navigation"
+            $args += "--inject", "./bin/navigation.js"
             $args += "--enable-drag-drop"
             $args += "--enable-find"
           }
