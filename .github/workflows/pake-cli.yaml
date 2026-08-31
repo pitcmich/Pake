@@ -67,9 +67,9 @@ on:
         description: "Package formats (comma-separated: deb,appimage,rpm,zst)"
         required: false
         default: "deb"
-      debug:
-        description: "Debug?"
-        required: true
+      enhancedNav:
+        description: "Use enhanced navigation"
+        required: false
         default: "No"
         type: choice
         options:
@@ -166,9 +166,8 @@ jobs:
             ARGS+=("--targets" "${{ inputs.targets }}")
           fi
 
-          if [ "${{ inputs.debug }}" == "Yes" ]; then
-            ARGS+=("--use-local-file")
-            ARGS+=("--debug")
+          if [ "${{ inputs.enhancedNav }}" == "Yes" ]; then
+            ARGS+=("--forceInternalNavigation")
             ARGS+=("--enable-drag-drop")
             ARGS+=("--enable-find")
           fi
@@ -219,9 +218,8 @@ jobs:
             $args += "--new-window"
           }
 
-          if ("${{ inputs.debug }}" -eq "Yes") {
-            $args += "--use-local-file"
-            $args += "--debug"
+          if ("${{ inputs.enhancedNav }}" -eq "Yes") {
+            $args += "--forceInternalNavigation"
             $args += "--enable-drag-drop"
             $args += "--enable-find"
           }
