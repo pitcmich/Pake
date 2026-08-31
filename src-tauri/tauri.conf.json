@@ -12,7 +12,8 @@
     "security": {
       "headers": {},
       "csp": null
-    }
+    },
+    "devtools": true
   },
   "build": {
     "frontendDist": "../dist"
