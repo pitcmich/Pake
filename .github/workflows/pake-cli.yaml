@@ -53,20 +53,6 @@ on:
         required: false
         type: boolean
         default: false
-      new_window:
-        description: "Allow sites to open new windows"
-        required: false
-        type: boolean
-        default: false
-      multi_arch:
-        description: "Universal binary (macOS only)"
-        required: false
-        type: boolean
-        default: false
-      targets:
-        description: "Package formats (comma-separated: deb,appimage,rpm,zst)"
-        required: false
-        default: "deb"
       enable_drag_drop:
         description: "Enable drag and drop"
         required: false
@@ -82,16 +68,30 @@ on:
         required: false
         type: boolean
         default: false
-      keep_binary:
-        description: "Keep binary after build"
-        required: false
-        type: boolean
-        default: false
       multi_window:
         description: "Enable multi-window support"
         required: false
         type: boolean
         default: false
+      new_window:
+        description: "Allow sites to open new windows"
+        required: false
+        type: boolean
+        default: false
+      keep_binary:
+        description: "Keep binary after build"
+        required: false
+        type: boolean
+        default: false
+      multi_arch:
+        description: "Universal binary (macOS only)"
+        required: false
+        type: boolean
+        default: false
+      targets:
+        description: "Package formats (comma-separated: deb,appimage,rpm,zst)"
+        required: false
+        default: "deb"
 
 jobs:
   build:
