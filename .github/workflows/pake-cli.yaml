@@ -67,6 +67,31 @@ on:
         description: "Package formats (comma-separated: deb,appimage,rpm,zst)"
         required: false
         default: "deb"
+      enable_drag_drop:
+        description: "Enable drag and drop"
+        required: false
+        type: boolean
+        default: false
+      enable_find:
+        description: "Enable find functionality"
+        required: false
+        type: boolean
+        default: false
+      force_internal_navigation:
+        description: "Force internal navigation"
+        required: false
+        type: boolean
+        default: false
+      keep_binary:
+        description: "Keep binary after build"
+        required: false
+        type: boolean
+        default: false
+      multi_window:
+        description: "Enable multi-window support"
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -159,6 +184,26 @@ jobs:
             ARGS+=("--targets" "${{ inputs.targets }}")
           fi
 
+          if [ "${{ inputs.enable_drag_drop }}" == "true" ]; then
+            ARGS+=("--enable-drag-drop")
+          fi
+
+          if [ "${{ inputs.enable_find }}" == "true" ]; then
+            ARGS+=("--enable-find")
+          fi
+
+          if [ "${{ inputs.force_internal_navigation }}" == "true" ]; then
+            ARGS+=("--force-internal-navigation")
+          fi
+
+          if [ "${{ inputs.keep_binary }}" == "true" ]; then
+            ARGS+=("--keep-binary")
+          fi
+
+          if [ "${{ inputs.multi_window }}" == "true" ]; then
+            ARGS+=("--multi-window")
+          fi
+
           echo "Running: node dist/cli.js ${ARGS[@]}"
           node dist/cli.js "${ARGS[@]}"
 
@@ -203,6 +248,26 @@ jobs:
 
           if ("${{ inputs.new_window }}" -eq "true") {
             $args += "--new-window"
+          }
+
+          if ("${{ inputs.enable_drag_drop }}" -eq "true") {
+            $args += "--enable-drag-drop"
+          }
+
+          if ("${{ inputs.enable_find }}" -eq "true") {
+            $args += "--enable-find"
+          }
+
+          if ("${{ inputs.force_internal_navigation }}" -eq "true") {
+            $args += "--force-internal-navigation"
+          }
+
+          if ("${{ inputs.keep_binary }}" -eq "true") {
+            $args += "--keep-binary"
+          }
+
+          if ("${{ inputs.multi_window }}" -eq "true") {
+            $args += "--multi-window"
           }
 
           Write-Host "Running: node dist/cli.js $($args -join ' ')"
